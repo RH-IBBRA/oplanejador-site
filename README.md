@@ -1,28 +1,24 @@
-# oPlanejador — site (primeira versão, rascunho)
+# oPlanejador — site (rascunho)
 
-Site de **oPlanejador**, marca pessoal de Leonardo Ces voltada à formação e
-evolução de Financial Advisors. Endereço oficial definido: **oplanejador.com**.
+Site pessoal de Leonardo Ces para formar e desenvolver **Financial Advisors**.
+Uma página só: apresenta o projeto e leva o visitante para as aulas, os materiais
+gratuitos e o contato. **Não é o site da IBBRA.**
 
-Construído conforme o briefing "Orientação para quem vai construir" (08/09/2026).
-Identidade, textos e composição são **proposta inicial para revisão** — não
-identidade final aprovada. Marco de referência: rascunho em S04.15 (12–18/10/2026).
+Implementação da **home aprovada por Leonardo** (identidade v0.5 "Caderno",
+aprovada em 12/10/2026; pacote de repasse `oPlanejador_site_repasse_Marcelo_v1.1`,
+de 14/10/2026). A especificação visual é o `site-referencia/index.html` do pacote.
 
-100% estático: HTML, CSS e JS, sem build, sem dependências e sem fontes externas.
+Estático: HTML, CSS e JS, sem build. A única dependência externa são as fontes
+(Google Fonts, licença OFL).
 
-## Estado atual
+## Estado
 
-O site está em **modo rascunho**, o que significa:
-
-- `<meta name="robots" content="noindex, nofollow">` ativo no `index.html`;
-- tudo que ainda depende de insumo ou validação aparece marcado como **pendente**
-  no próprio cartão (a faixa de aviso no topo foi retirada a pedido);
-- nenhum link externo está ativo, porque nenhum destino foi validado ainda.
-
-As pendências e o checklist de aceite estão em [ACEITE.md](ACEITE.md).
+Em **modo rascunho**: `noindex` ativo, faixa de aviso no topo e marcações de
+pendência visíveis. Pendências e checklist em [ACEITE.md](ACEITE.md).
 
 ## Como abrir
 
-- **Duplo clique em `index.html`** (funciona offline), ou
+- Duplo clique em `index.html`, ou
 - `powershell -ExecutionPolicy Bypass -File serve.ps1` → `http://localhost:8899`
 
 ## Arquivos
@@ -30,73 +26,53 @@ As pendências e o checklist de aceite estão em [ACEITE.md](ACEITE.md).
 | Arquivo | O que é |
 | --- | --- |
 | `index.html` | a página inteira; os **textos** ficam aqui |
-| `assets/config.js` | **links, materiais, contato, fotos e o modo** (rascunho/público) |
-| `assets/style.css` | cores, tipografia e escala — tudo no `:root` no topo |
+| `assets/config.js` | **links, materiais, contato e o modo** (rascunho/público) |
+| `assets/style.css` | cores, fontes e escala — tudo no `:root` no topo |
 | `assets/app.js` | aplica o `config.js` na página; não guarda conteúdo |
-| `assets/leonardo.jpg` | foto vertical usada na **abertura** |
-| `assets/leonardo-retrato.jpg` | retrato pequeno usado no bloco **Sobre** |
-| `assets/logo-oplanejador.svg` | **símbolo principal** em paths puros, para fundos claros |
-| `assets/logo-oplanejador-claro.svg` | o mesmo símbolo para fundos escuros |
-| `assets/logo-oplanejador-reduzido.svg` | **versão reduzida** (só a letra), para usos abaixo de ~30px |
-| `assets/favicon.svg` | símbolo em areia sobre quadrado azul, usado como favicon |
-| `assets/og-oplanejador.svg` | desenho-fonte da imagem de compartilhamento (editável) |
-| `assets/og-oplanejador.png` | a imagem de compartilhamento usada pelas redes, 1200×630 |
-| `serve.ps1` | servidor local opcional para preview (não vai para o deploy) |
-| `_arquivo/` | conteúdo do conceito anterior, fora do deploy — ver `_arquivo/LEIA-ME.md` |
+| `assets/img/` | fotos aprovadas (1200×1800) e a imagem de compartilhamento |
+| `assets/icons/` | favicon (ICO, SVG, 32px), apple-touch e assinatura em SVG |
+| `serve.ps1` | servidor local opcional (fora do deploy) |
+| `_arquivo/` | conceito anterior ao repasse, fora do deploy |
+
+A identidade completa (9 SVG e 18 PNG da assinatura, avatar e favicon) está no
+pacote de repasse e no Dropbox de Leonardo, em `/oPlanejador/Identidade`.
 
 ## Como editar
 
-**Trocar cor ou tipografia:** só o bloco `:root` no início de `assets/style.css`.
-Mudar lá recolore e reescala o site inteiro.
+**Cores e tipografia:** o bloco `:root` no início de `assets/style.css`.
+**Não alterar as cores e as fontes da marca sem aprovação de Leonardo.**
 
-**Trocar textos:** direto no `index.html`. Cada seção está comentada.
+**Textos:** direto no `index.html`, com cada seção comentada.
 
-**Ligar um canal, cadastrar material ou definir o contato:** só o
-`assets/config.js`. As regras que o site garante sozinho:
+**Links, materiais e contato:** só o `assets/config.js`. As regras que o site
+garante sozinho, conforme o LEIA-ME do repasse:
 
-- canal com `confirmado: false` **não ganha botão ativo** e, na versão pública,
-  nem aparece;
-- o botão "Ver aulas" no cabeçalho só existe quando o YouTube estiver confirmado;
-- material sem arquivo real não aparece na versão pública — a seção some inteira
-  se não houver nenhum;
-- o contato só vira botão quando houver e-mail preenchido.
-
-Isso é proposital: o briefing proíbe publicar link inventado ou prometer material
-que ainda não existe.
+- link só fica ativo quando o destino está confirmado;
+- canal sem destino real não aparece na versão pública;
+- material sem arquivo real não é anunciado — a seção some se não houver nenhum;
+- no rascunho, tudo que falta aparece marcado.
 
 ## Como virar a versão pública
 
-Só depois da aprovação de Leonardo (ver [ACEITE.md](ACEITE.md)):
+Só depois da aprovação de Leonardo:
 
-1. Preencher `assets/config.js` com URLs validadas, e-mail público e materiais reais.
-2. Trocar `modo: 'rascunho'` por `modo: 'publico'` no mesmo arquivo.
+1. Preencher `assets/config.js` com a URL do podcast e o primeiro material real.
+2. Trocar `modo: 'rascunho'` por `modo: 'publico'`.
 3. Remover a linha `<meta name="robots" content="noindex, nofollow" />` do `index.html`.
-4. Testar todos os links, downloads e o contato com destinos reais.
+4. Testar todos os links com destinos reais.
 
 ## Deploy
 
-Repositório: `RH-IBBRA/LEO-CES-Mentoria` (branch `main`).
-Hospedagem estática (Vercel ou equivalente) — não há build, o repositório é
-servido como está. `serve.ps1` e `_arquivo/` ficam fora do deploy via
-`.vercelignore`.
+Repositório: `RH-IBBRA/LEO-CES-Mentoria` (branch `main`). Sem build: o repositório
+é servido como está. Domínio `oplanejador.com` no Squarespace Domains, no nome de
+Leonardo, que é o único administrador — o acesso ao DNS é nominal e restrito, e
+vem quando a implantação começar (S03.11).
 
-O domínio `oplanejador.com` está registrado no nome de Leonardo desde 07/09/2026.
-Provedor e acesso ao DNS ainda precisam ser organizados antes da implantação.
+Custos do site devem ser apresentados a Leonardo **separadamente** do teto de
+R$ 1.000/mês dos agentes. Nesta versão não há serviço pago: o site é estático e
+cabe em plano gratuito.
 
-## O que não entra nesta versão
+## Prazos
 
-Por decisão do briefing, e porque as ofertas não estão definidas: área de
-membros, checkout, curso pago, mentoria à venda, comunidade aberta, candidatura à
-IBBRA e chatbot.
-
-Também foram retirados do conceito anterior, por não terem respaldo no briefing
-atual: o formulário de newsletter (era simulado, sem serviço ligado) e o convite
-ao grupo de WhatsApp (comunidade aberta não está definida, e o WhatsApp de
-operação interna não é atendimento ao público).
-
-## Custos
-
-Nesta versão não há serviço pago contratado: o site é estático e pode ser
-hospedado no plano gratuito. Qualquer custo de site deve ser apresentado a
-Leonardo **separadamente** do teto de R$ 1.000/mês, que se refere a agentes,
-APIs, WhatsApp e infraestrutura da operação.
+Rascunho navegável **18/10/2026** · testes de navegação e links 19–25/10 ·
+publicação no lançamento integrado, a partir de 16/11, com aprovação de Leonardo.

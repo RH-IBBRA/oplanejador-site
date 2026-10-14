@@ -1,113 +1,71 @@
 /* ============================================================
-   oPlanejador — configuracoes centrais
+   oPlanejador — configurações centrais
    ------------------------------------------------------------
-   Edite SOMENTE este arquivo para: ligar/desligar canais,
-   trocar URLs, cadastrar materiais gratuitos e definir o
-   contato publico. Nao e necessario mexer em HTML ou CSS.
+   Edite SOMENTE este arquivo para: ligar/desligar canais, trocar
+   URLs, cadastrar materiais e definir o contato. Não é preciso
+   mexer em HTML ou CSS.
 
-   modo: 'rascunho' -> marca as pendencias na tela, para revisao
-         'publico'  -> esconde tudo que ainda nao tem destino real
+   modo: 'rascunho' -> mostra as marcações de pendência
+         'publico'  -> esconde tudo que ainda não tem destino real
+
+   Links confirmados no pacote de repasse v1.1 (14/10/2026).
    ============================================================ */
 
 var OP_CONFIG = {
 
   modo: 'rascunho',
 
-  /* --- Canais -------------------------------------------------
-     confirmado: false -> o cartao aparece sem botao ativo (e,
-                          no modo 'publico', nao aparece)
-     confirmado: true  -> o botao passa a levar para a url
-
-     Handles informados por Leonardo em 08/09/2026. As URLs
-     abaixo foram derivadas desses handles e AINDA NAO foram
-     validadas — conferir o destino antes de confirmar.
-  ------------------------------------------------------------ */
   canais: {
     youtube: {
-      url: 'https://www.youtube.com/@leonardoces',
-      /* Canal validado em 21/09/2026: existe e ja se chama "O Planejador".
-         Ativado por decisao de Marcelo na mesma data, ainda sem videos: o
-         lancamento no YouTube vem depois. (O briefing pedia conteudo
-         disponivel para ativar; a excecao foi decidida conscientemente.) */
+      arroba: '@oplanejador360',
+      url: 'https://www.youtube.com/@oplanejador360',
       confirmado: true,
-      nota: 'Canal ativo, com lançamento dos vídeos previsto para depois.'
+      nota: ''
     },
     instagram: {
-      url: 'https://www.instagram.com/leonardoibbra',
-      /* Confirmado como definitivo por Marcelo em 21/09/2026; perfil ativo. */
+      arroba: '@leonardoces',
+      url: 'https://www.instagram.com/leonardoces',
+      /* A troca de @leonardoibbra para @leonardoces foi feita em 14/10/2026.
+         Link conferido e funcionando na mesma data, o que encerra a pendência
+         "conferir quando a troca concluir" do LEIA-ME. */
       confirmado: true,
-      nota: 'Perfil @leonardoibbra, confirmado como definitivo.'
+      nota: ''
     },
     podcast: {
+      arroba: 'Spotify · YouTube',
       url: '',
       confirmado: false,
-      nota: 'Sem endereço definido. Podcast previsto a partir da S10.'
+      nota: 'Pendente · URL do programa no Spotify for Creators (no lançamento)'
     }
   },
 
-  /* Canais de expansao: entram no rodape apenas quando confirmados. */
+  /* Entram no rodapé quando confirmados. */
   expansao: {
-    linkedin: {
-      rotulo: 'LinkedIn',
-      /* URL fornecida por Marcelo em 21/09/2026. O LinkedIn exige login para
-         exibir perfil, entao nao foi aberto aqui; vale pela fonte direta. */
-      url: 'https://www.linkedin.com/in/leonardoces/',
-      confirmado: true,
-      nota: 'URL fornecida diretamente em 21/09/2026.'
-    },
-    x: {
-      rotulo: 'X',
-      url: 'https://x.com/leonardoces',
+    privacidade: {
+      rotulo: 'Privacidade',
+      url: '',
       confirmado: false,
-      nota: 'Handle informado em 08/09/2026; validar destino.'
-    },
-    tiktok: {
-      rotulo: 'TikTok',
-      url: 'https://www.tiktok.com/@leonardo.ces8',
-      confirmado: false,
-      nota: 'Handle informado em 08/09/2026; validar destino.'
+      /* O LEIA-ME pede página de privacidade só se houver medição
+         (analytics) ou formulário. Hoje o site não tem nenhum dos dois.
+         Se entrar, criar a página e preencher a url aqui. */
+      nota: 'Página de privacidade: necessária apenas se entrar analytics ou formulário.'
     }
   },
 
-  /* --- Contato publico ---------------------------------------
-     Preencher com o e-mail que Leonardo definir para o projeto.
-     O WhatsApp de operacao dos agentes NAO entra aqui: e uma
-     funcao interna, nao atendimento ao publico.
-  ------------------------------------------------------------ */
   contato: {
-    /* Fornecido por Marcelo em 21/09/2026. */
-    email: 'leonardo@ibbra.com.br',
-    nota: 'E-mail público definido.'
+    email: 'leonardo@oplanejador.com',
+    nota: ''
   },
 
-  /* --- Fotos -------------------------------------------------
-     hero: '' mantem a abertura tipografica, sem foto.
-     Usar somente fotografia real de Leonardo, com origem e
-     permissao de uso registradas. Nao usar banco de imagens.
-  ------------------------------------------------------------ */
-  fotos: {
-    /* Foto da abertura (vertical, grande). Enquanto o arquivo nao
-       existir, a abertura fica tipografica, sem imagem quebrada. */
-    hero: 'assets/leonardo.jpg',
-    heroAlt: 'Leonardo Ces',
-    heroNota: 'Origem: materia da GPS Brasilia. Permissao de uso nao registrada. Otimizada em 21/09/2026: 900x1350, 77 KB (era 2976x4464, 707 KB).',
-    retrato: 'assets/leonardo-retrato.jpg',
-    retratoAlt: 'Leonardo Ces',
-    retratoNota: 'Enviada por Marcelo em 17/09/2026. 200x200 px: exibida em 140px por isso. Nao ampliar. Registrar origem e permissao de uso.'
-  },
-
-  /* --- Materiais gratuitos -----------------------------------
-     Cadastrar somente o que ja existe como arquivo real.
-     Modelo de cada item:
+  /* Cadastrar só o que já existe como arquivo real. Modelo:
      {
-       titulo:   'Nome real do material',
-       problema: 'Que problema ele ajuda a resolver',
-       formato:  'PDF, 4 paginas',
+       titulo:   'Mapa da Zona X',
+       problema: 'Que problema o material ajuda a resolver, em uma frase.',
+       formato:  'PDF, 4 páginas',
        aula:     'Aula relacionada',
-       url:      'materiais/arquivo.pdf'
+       url:      'materiais/mapa-da-zona-x.pdf'
      }
-     Lista vazia: no modo 'rascunho' aparecem espacos marcados
-     como pendentes; no modo 'publico' a secao fica oculta.
-  ------------------------------------------------------------ */
+     Lista vazia: no rascunho ficam os espaços do modelo; no modo
+     'publico' a seção some. Primeiro material previsto: "Mapa da Zona X". */
   materiais: []
 };

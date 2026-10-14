@@ -1,13 +1,12 @@
 /* ============================================================
-   oPlanejador — comportamento da pagina
+   oPlanejador — comportamento da página
    ------------------------------------------------------------
-   Este arquivo NAO guarda conteudo: ele apenas aplica o que
-   esta em assets/config.js. Regras que ele garante:
-
-   - botao/link so fica ativo quando o destino esta confirmado;
-   - cartao sem destino real nao aparece na versao publica;
-   - material sem arquivo real nao aparece na versao publica;
-   - no modo 'rascunho', tudo que falta aparece marcado.
+   Não guarda conteúdo: só aplica o que está em assets/config.js.
+   Regras que garante, conforme o LEIA-ME do repasse:
+   - link só fica ativo quando o destino está confirmado;
+   - cartão sem destino real não aparece na versão pública;
+   - material sem arquivo real não é anunciado;
+   - no rascunho, tudo que falta aparece marcado.
    ============================================================ */
 
 (function () {
@@ -17,7 +16,6 @@
   var rascunho = cfg.modo !== 'publico';
   var canais = cfg.canais || {};
   var expansao = cfg.expansao || {};
-  var fotos = cfg.fotos || {};
   var contato = cfg.contato || {};
   var materiais = Array.isArray(cfg.materiais) ? cfg.materiais : [];
 
@@ -30,10 +28,8 @@
     if (/^https?:/i.test(url)) { a.target = '_blank'; a.rel = 'noopener'; }
   }
 
-  /* ---------- 1. Modo publico esconde as marcacoes ---------- */
-  if (!rascunho) {
-    document.querySelectorAll('[data-so-rascunho]').forEach(esconder);
-  }
+  /* ---------- 1. Modo público ---------- */
+  if (!rascunho) document.body.classList.add('publico');
 
   /* ---------- 2. Canais ---------- */
   var visiveis = 0;
@@ -42,10 +38,13 @@
     var link = cartao.querySelector('[data-canal-link]');
     var aviso = cartao.querySelector('[data-canal-pendencia]');
     var nota = cartao.querySelector('[data-canal-nota]');
+    var arroba = cartao.querySelector('[data-canal-arroba]');
+
+    if (arroba && c.arroba) arroba.textContent = c.arroba;
 
     if (ativo(c)) {
       if (link) { externo(link, c.url); mostrar(link); }
-      esconder(aviso);
+      if (aviso) aviso.remove();
       visiveis++;
       return;
     }
@@ -53,8 +52,6 @@
     if (rascunho) { visiveis++; } else { esconder(cartao); }
   });
 
-  /* Sem nenhum canal para mostrar, a secao inteira sai de cena
-     e a chamada da abertura passa a apontar para "Para quem e". */
   if (!visiveis) {
     esconder(document.getElementById('conteudos'));
     document.querySelectorAll('a[href="#conteudos"]').forEach(function (a) {
@@ -62,68 +59,35 @@
     });
   }
 
-  /* ---------- 3. Botao "Ver aulas" do cabecalho ---------- */
-  var ctaAulas = document.getElementById('ctaAulas');
-  if (ctaAulas && ativo(canais.youtube)) {
-    externo(ctaAulas, canais.youtube.url);
-    mostrar(ctaAulas);
-  }
-
-  /* ---------- 4. Fotos ---------- */
-  var hero = document.getElementById('heroFoto');
-  if (hero && fotos.hero) {
-    var heroImg = document.getElementById('heroFotoImg');
-    if (heroImg) {
-      /* Arquivo ainda nao esta na pasta: mantem a abertura tipografica
-         em vez de mostrar imagem quebrada. */
-      heroImg.addEventListener('error', function () {
-        esconder(hero);
-      });
-      heroImg.alt = fotos.heroAlt || 'Leonardo Ces';
-      heroImg.src = fotos.hero;
-    }
-    mostrar(hero);
-  }
-
-  var sobreFoto = document.getElementById('sobreFoto');
-  var sobreImg = document.getElementById('sobreFotoImg');
-  if (sobreFoto && sobreImg) {
-    if (fotos.retrato) {
-      sobreImg.src = fotos.retrato;
-      sobreImg.alt = fotos.retratoAlt || 'Leonardo Ces';
-    } else {
-      esconder(sobreFoto);
-    }
-  }
-
-  /* ---------- 5. Contato ---------- */
+  /* ---------- 3. Contato ---------- */
   var email = (contato.email || '').trim();
-  if (email) {
-    var cLink = document.getElementById('contatoLink');
-    if (cLink) {
-      cLink.href = 'mailto:' + email;
-      cLink.textContent = email;
-      mostrar(cLink);
-    }
-    esconder(document.getElementById('contatoPendencia'));
+  var cLink = document.getElementById('contatoLink');
+  if (email && cLink) {
+    cLink.href = 'mailto:' + email;
+    cLink.textContent = email;
+    mostrar(cLink);
+    var cPend = document.getElementById('contatoPendencia');
+    if (cPend) cPend.remove();
   }
 
-  /* ---------- 6. Materiais gratuitos ---------- */
+  /* ---------- 4. Materiais ---------- */
   var lista = document.getElementById('listaMateriais');
   if (lista) {
     if (materiais.length) {
-      var modelo = lista.querySelector('[data-material-modelo]');
-      var icone = modelo ? modelo.querySelector('.icone') : null;
-
-      lista.querySelectorAll('[data-material-modelo]').forEach(function (el) {
-        el.parentNode.removeChild(el);
-      });
+      lista.classList.remove('pendente-bloco');
+      lista.querySelectorAll('[data-material-modelo]').forEach(function (el) { el.remove(); });
 
       materiais.forEach(function (m) {
         var art = document.createElement('article');
-        art.className = 'cartao';
+        art.className = 'material';
 
-        if (icone) art.appendChild(icone.cloneNode(true));
+        var detalhe = [m.formato, m.aula].filter(Boolean).join(' · ');
+        if (detalhe) {
+          var meta = document.createElement('p');
+          meta.className = 'material-meta';
+          meta.textContent = detalhe;
+          art.appendChild(meta);
+        }
 
         var h3 = document.createElement('h3');
         h3.textContent = m.titulo || 'Material';
@@ -135,94 +99,52 @@
           art.appendChild(p);
         }
 
-        var detalhe = [m.formato, m.aula].filter(Boolean).join(' · ');
-        if (detalhe) {
-          var d = document.createElement('p');
-          d.className = 'campo-modelo';
-          d.textContent = detalhe;
-          art.appendChild(d);
-        }
-
-        var acao = document.createElement('div');
-        acao.className = 'acao';
         if (m.url) {
           var a = document.createElement('a');
-          a.className = 'botao botao-secundario';
+          a.className = 'botao botao-contorno';
           a.textContent = 'Acessar material';
           externo(a, m.url);
-          acao.appendChild(a);
+          art.appendChild(a);
         }
-        art.appendChild(acao);
-
         lista.appendChild(art);
       });
     } else if (!rascunho) {
-      /* Sem arquivo real, a secao nao vai ao ar. */
       esconder(document.getElementById('materiais'));
     }
   }
 
-  /* ---------- 7. Links do rodape ---------- */
+  /* ---------- 5. Links do rodapé ---------- */
   var rodape = document.getElementById('rodapeLinks');
   if (rodape) {
     var rotulos = { youtube: 'YouTube', instagram: 'Instagram', podcast: 'Podcast' };
-    var postos = 0;
-    var faltando = 0;
 
-    function porLista(obj, nomePadrao) {
-      Object.keys(obj).forEach(function (k) {
-        var c = obj[k] || {};
-        if (!ativo(c)) { faltando++; return; }
-        var a = document.createElement('a');
-        a.textContent = c.rotulo || nomePadrao[k] || k;
-        externo(a, c.url);
-        rodape.appendChild(a);
-        postos++;
-      });
-    }
+    Object.keys(canais).forEach(function (k) {
+      var c = canais[k];
+      if (!ativo(c)) return;
+      var a = document.createElement('a');
+      a.textContent = rotulos[k] || k;
+      externo(a, c.url);
+      rodape.appendChild(a);
+    });
 
-    porLista(canais, rotulos);
-    porLista(expansao, {});
+    var contatoLink = document.createElement('a');
+    contatoLink.textContent = 'Contato';
+    contatoLink.href = '#contato';
+    rodape.appendChild(contatoLink);
 
-    if (email) {
-      var ea = document.createElement('a');
-      ea.textContent = email;
-      ea.href = 'mailto:' + email;
-      rodape.appendChild(ea);
-      postos++;
-    }
-
-    if (postos && !faltando) esconder(document.getElementById('rodapePendencia'));
+    Object.keys(expansao).forEach(function (k) {
+      var c = expansao[k];
+      if (!ativo(c)) return;
+      var a = document.createElement('a');
+      a.textContent = c.rotulo || k;
+      externo(a, c.url);
+      rodape.appendChild(a);
+    });
   }
 
-  /* ---------- 8. Itens de menu sem destino visivel ----------
-     Se uma secao saiu do ar (canal nao confirmado, material
-     inexistente), o item correspondente sai do menu tambem. */
-  document.querySelectorAll('#menuPrincipal a[href^="#"]').forEach(function (a) {
+  /* ---------- 6. Itens de menu sem destino visível ---------- */
+  document.querySelectorAll('.menu a[href^="#"]').forEach(function (a) {
     var alvo = document.getElementById(a.getAttribute('href').slice(1));
     if (!alvo || alvo.hidden) esconder(a);
   });
-
-  /* ---------- 9. Menu no celular ---------- */
-  var botao = document.getElementById('abreMenu');
-  var menu = document.getElementById('menuPrincipal');
-  if (botao && menu) {
-    botao.addEventListener('click', function () {
-      var aberto = menu.classList.toggle('aberto');
-      botao.setAttribute('aria-expanded', aberto ? 'true' : 'false');
-    });
-    menu.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') {
-        menu.classList.remove('aberto');
-        botao.setAttribute('aria-expanded', 'false');
-      }
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && menu.classList.contains('aberto')) {
-        menu.classList.remove('aberto');
-        botao.setAttribute('aria-expanded', 'false');
-        botao.focus();
-      }
-    });
-  }
 })();

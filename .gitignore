@@ -9,3 +9,6 @@ node_modules/
 
 # Config local de ferramentas
 .claude/
+
+# Pacote de repasse aprovado (referencia, nao vai para o deploy)
+_referencia/

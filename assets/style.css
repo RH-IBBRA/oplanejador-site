@@ -1,345 +1,244 @@
 /* ============================================================
-   oPlanejador — identidade inicial (proposta, sujeita a revisao)
+   oPlanejador — identidade v0.5 "Caderno", aprovada em 12/10/2026.
    ------------------------------------------------------------
-   Tudo o que define cor, tipografia e escala esta no :root
-   abaixo. Alterar la recolore e reescala o site inteiro, sem
-   precisar mexer no resto do arquivo nem no HTML.
+   Implementação da home aprovada (pacote de repasse v1.1). Cores,
+   fontes e escala ficam no :root abaixo: mexer lá recolore e
+   reescala o site inteiro, sem tocar no resto.
+   NÃO alterar as cores e as fontes da marca sem aprovação.
    ============================================================ */
 
 :root{
-  /* --- Paleta (briefing de 08/09/2026) --- */
-  --azul:#142D3D;          /* titulos, cabecalho e botoes principais */
-  --azul-2:#1D3F55;        /* hover e variacao do azul */
-  --marfim:#F7F5EF;        /* fundo predominante */
-  --marfim-2:#EFEBE1;      /* faixa alternada */
-  --grafite:#242B30;       /* texto corrido */
-  --petroleo:#245B57;      /* destaque secundario e links */
-  --petroleo-2:#1B4744;    /* hover do destaque secundario */
-  --areia:#D9C7A3;         /* detalhes e pequenos fundos.
-                              NAO usar como texto sobre fundo claro */
+  /* --- Paleta da marca --- */
+  --tinta:#1E2B4D;
+  --papel:#F6F1E7;
+  --linho:#E9E0CF;
+  --grafite:#2A2A2C;
+  --pedra:#6B6660;
+  --couro:#7A4E33;
+  --latao:#C29A5B;
 
-  --branco:#FFFFFF;
-  --linha:#E3DED2;         /* bordas discretas */
-  --linha-2:#CFC7B5;
-  --texto-suave:#4A545C;   /* apoio; contraste 7:1 sobre o marfim */
-  --claro-no-escuro:#F2EFE8;
-  --claro-no-escuro-2:#C9D2D8;
+  /* --- Apoio --- */
+  --branco-papel:#FFFDF8;
+  --borda:#D9CFBB;
+  --borda-clara:#E2D8C4;
+  --texto:#4F4A44;
+  --rodape-texto:#C9C3B6;
+  --rodape-borda:#3A4766;
 
-  /* --- Tipografia (sem dependencia de fontes externas) --- */
-  --fonte-titulo:Georgia,"Times New Roman",Times,serif;
-  --fonte-texto:Arial,Helvetica,"Segoe UI",sans-serif;
-  --corpo:17px;
+  /* --- Tipografia --- */
+  --serifa:'Libre Caslon Text',Georgia,serif;
+  --sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
 
-  /* --- Escala e espaco --- */
-  --largura:1120px;
-  --largura-texto:64ch;
-  --raio:10px;
-  --secao:clamp(56px,8vw,104px);
+  /* --- Escala --- */
+  --largura:1240px;
+  --gutter:clamp(20px,5vw,72px);
+  --secao-y:clamp(64px,9vw,128px);
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-/* O atributo hidden tem que vencer as classes que definem display. */
+*{box-sizing:border-box}
 [hidden]{display:none !important}
 html{scroll-behavior:smooth}
 body{
-  background:var(--marfim);
-  color:var(--grafite);
-  font-family:var(--fonte-texto);
-  font-size:var(--corpo);
-  line-height:1.65;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  margin:0;background:var(--papel);color:var(--grafite);
+  font-family:var(--sans);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
-img{max-width:100%;display:block;height:auto}
-a{color:var(--petroleo);text-decoration:underline;text-underline-offset:3px}
-a:hover{color:var(--petroleo-2)}
-::selection{background:var(--areia);color:var(--azul)}
+img{display:block;max-width:100%}
+h1,h2,h3{font-family:var(--serifa);font-weight:400;color:var(--tinta);margin:0}
+p{margin:0}
+a{color:var(--tinta)}
+:focus-visible{outline:2px solid var(--latao);outline-offset:3px}
+.citacao :focus-visible,.rodape :focus-visible{outline-color:var(--latao)}
 
-/* Foco sempre visivel, em qualquer fundo */
-:focus-visible{outline:3px solid var(--petroleo);outline-offset:3px;border-radius:2px}
-.escuro :focus-visible{outline-color:var(--areia)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
-/* Atalho de teclado para o conteudo */
 .pular{
   position:absolute;left:-9999px;top:0;z-index:100;
-  background:var(--azul);color:var(--claro-no-escuro);
-  padding:12px 18px;border-radius:0 0 var(--raio) 0;text-decoration:none;
+  background:var(--tinta);color:var(--papel);padding:12px 18px;text-decoration:none;
 }
 .pular:focus{left:0}
 
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *{transition:none !important}
+/* content-box de proposito: na referencia o limite de 1240px vale para o
+   conteudo, e o recuo lateral entra por fora. Com border-box o conteudo
+   ficaria ate 128px mais estreito em telas largas. */
+.faixa{box-sizing:content-box;max-width:var(--largura);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+
+/* Itens pendentes: aparecem só no rascunho. No modo público o app.js
+   põe a classe "publico" no body e tudo isto sai. */
+.pendente{display:flex}
+body.publico .pendente,body.publico .pendente-bloco{display:none !important}
+.selo-pendente{
+  align-self:flex-start;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  font-weight:600;color:var(--couro);border:1px dashed var(--couro);padding:4px 10px;
+  line-height:1.4;
 }
+.aviso-rascunho{background:var(--grafite);color:var(--papel);font-size:13px;line-height:1.5}
+.aviso-rascunho > div{padding:10px var(--gutter);text-align:center;width:100%}
 
-/* ---------- Estruturas de base ---------- */
-.faixa{max-width:var(--largura);margin:0 auto;padding:0 24px;position:relative;z-index:1}
-section{padding:var(--secao) 0}
-.fundo-alt{background:var(--marfim-2)}
-.escuro{background:var(--azul);color:var(--claro-no-escuro)}
-.escuro a{color:var(--areia)}
-.escuro a:hover{color:var(--branco)}
-
-h1,h2,h3,h4{font-family:var(--fonte-titulo);color:var(--azul);line-height:1.2;font-weight:700}
-.escuro h1,.escuro h2,.escuro h3,.escuro h4{color:var(--claro-no-escuro)}
-h1{font-size:clamp(30px,4.6vw,50px);letter-spacing:-.01em}
-h2{font-size:clamp(25px,3.4vw,37px);letter-spacing:-.005em}
-h3{font-size:clamp(19px,2vw,22px)}
-p{max-width:var(--largura-texto)}
-
-.rotulo{
-  display:flex;align-items:baseline;gap:12px;
-  font-family:var(--fonte-texto);font-size:12px;font-weight:700;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--petroleo);margin-bottom:14px;
-}
-.rotulo .num{font-family:var(--fonte-titulo);font-size:16px;letter-spacing:.02em;opacity:.8}
-.rotulo .num::after{
-  content:"";display:inline-block;width:24px;height:1px;background:currentColor;
-  vertical-align:middle;margin-left:12px;opacity:.55;
-}
-.escuro .rotulo{color:var(--areia)}
-.abertura-secao{margin-bottom:clamp(32px,4vw,52px)}
-.abertura-secao p{color:var(--texto-suave);margin-top:16px;font-size:18px}
-.escuro .abertura-secao p{color:var(--claro-no-escuro-2)}
-
-/* ---------- Botoes ---------- */
+/* ---------- Botões ---------- */
 .botao{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--fonte-texto);font-size:16px;font-weight:700;
-  padding:14px 24px;border-radius:6px;border:2px solid transparent;
-  cursor:pointer;text-decoration:none;transition:background .15s,color .15s,border-color .15s;
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:52px;padding:0 28px;font-family:var(--sans);font-weight:500;font-size:16px;
+  text-decoration:none;border:1px solid transparent;cursor:pointer;
+  transition:background .15s,color .15s,border-color .15s;
 }
-.botao-principal{background:var(--azul);color:var(--claro-no-escuro);border-color:var(--azul)}
-.botao-principal:hover{background:var(--azul-2);border-color:var(--azul-2);color:var(--branco)}
-.botao-secundario{background:transparent;color:var(--azul);border-color:var(--linha-2)}
-.botao-secundario:hover{border-color:var(--petroleo);color:var(--petroleo-2);background:var(--branco)}
-.escuro .botao-principal{background:var(--areia);color:var(--azul);border-color:var(--areia)}
-.escuro .botao-principal:hover{background:var(--branco);border-color:var(--branco)}
-.escuro .botao-secundario{color:var(--claro-no-escuro);border-color:rgba(242,239,232,.4)}
-.escuro .botao-secundario:hover{border-color:var(--areia);color:var(--areia);background:transparent}
-.botao svg{width:20px;height:20px;flex:none}
+.botao-principal{background:var(--tinta);color:var(--papel);border-color:var(--tinta)}
+.botao-principal:hover{background:#17223C;border-color:#17223C}
+.botao-contorno{background:transparent;color:var(--tinta);border-color:var(--tinta)}
+.botao-contorno:hover{background:var(--tinta);color:var(--papel)}
+.botao-largo{min-height:56px;width:100%}
+.botao-inativo{border-color:var(--pedra);color:var(--texto);cursor:default;min-height:48px;padding:0 22px;font-size:15px}
+.botao-inativo:hover{background:transparent;color:var(--texto)}
 
-/* ---------- Cabecalho ---------- */
-.topo{
-  position:sticky;top:0;z-index:40;background:var(--azul);
-  border-bottom:1px solid rgba(217,199,163,.22);
-}
-.topo-in{display:flex;align-items:center;gap:20px;min-height:74px}
-.marca{display:flex;align-items:center;gap:13px;text-decoration:none;flex:none;line-height:1.1}
-.marca-txt{display:flex;flex-direction:column}
-.marca-simbolo{width:42px;height:42px;flex:none;color:var(--claro-no-escuro)}
-.marca-nome{font-family:var(--fonte-titulo);font-size:23px;font-weight:700;color:var(--claro-no-escuro);letter-spacing:-.01em}
-.marca-assinatura{font-family:var(--fonte-texto);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--areia);margin-top:4px}
-.menu{display:flex;gap:26px;margin-left:auto;align-items:center}
-.menu a{
-  font-size:15px;color:var(--claro-no-escuro);text-decoration:none;
-  padding:6px 0;border-bottom:2px solid transparent;white-space:nowrap;
-}
-.menu a:hover{color:var(--areia);border-bottom-color:var(--areia)}
-.topo .botao{padding:11px 18px;font-size:15px;white-space:nowrap}
-.abre-menu{
-  display:none;margin-left:auto;background:transparent;border:2px solid rgba(242,239,232,.4);
-  color:var(--claro-no-escuro);border-radius:6px;padding:9px 13px;font-size:15px;cursor:pointer;
-  font-family:var(--fonte-texto);
-}
+/* ---------- Cabeçalho e assinatura ---------- */
+.topo{border-bottom:1px solid var(--borda)}
+.topo-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 40px;padding-top:20px;padding-bottom:20px}
+.marca{display:inline-flex;flex-direction:column;align-items:stretch;gap:6px;text-decoration:none}
+.marca-nome{font-family:var(--serifa);font-size:30px;line-height:1;letter-spacing:-.01em;color:var(--tinta)}
+.marca-traco{display:flex;align-items:center}
+.marca-ponto{flex:0 0 6px;height:6px;border-radius:50%;background:var(--couro)}
+.marca-linha{flex:1 1 auto;height:2px;background:var(--couro)}
+.marca-assinatura{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--pedra);font-weight:500;text-align:right}
+.menu{display:flex;flex-wrap:wrap;gap:4px 28px;font-size:15px;font-weight:500}
+.menu a{color:var(--tinta);text-decoration:none;padding:10px 0;border-bottom:1px solid transparent}
+.menu a:hover{border-bottom-color:var(--couro)}
 
 /* ---------- Abertura ---------- */
-.hero{background:var(--azul);padding:clamp(64px,10vw,124px) 0 clamp(56px,8vw,104px)}
-.hero:has(.hero-foto:not([hidden])) .hero-grade{grid-template-columns:minmax(0,1.1fr) auto}
-.hero h1{max-width:21ch}
-.hero-texto{max-width:60ch;margin-top:22px;font-size:clamp(17px,2vw,20px);color:var(--claro-no-escuro-2)}
-.hero-acoes{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
-.hero-grade{display:grid;gap:clamp(32px,5vw,56px);align-items:center}
-/* Abertura: texto a esquerda, foto vertical a direita. A foto entra na
-   proporcao original (2:3), sem recorte, com largura limitada. */
-.hero-grade{grid-template-columns:minmax(0,1fr)}
-.hero-foto{justify-self:end;width:100%;max-width:340px}
-.hero-foto img{width:100%;border-radius:var(--raio);border:1px solid rgba(217,199,163,.35)}
-.regua{display:block;width:64px;height:3px;background:var(--areia);border-radius:2px;margin-bottom:28px}
+.inicio{
+  display:flex;flex-wrap:wrap;gap:48px 72px;align-items:center;
+  padding-top:clamp(48px,8vw,112px);padding-bottom:clamp(56px,7vw,96px);
+}
+.inicio-texto{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:28px}
+.sobrelinha{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--couro);font-weight:600}
+.inicio h1{font-size:clamp(38px,5.2vw,68px);line-height:1.08;letter-spacing:-.015em}
+.inicio h1 em{font-style:italic;color:var(--couro)}
+.inicio-apoio{font-size:clamp(17px,1.5vw,20px);line-height:1.6;max-width:600px}
+.acoes{display:flex;flex-wrap:wrap;gap:12px;padding-top:4px}
+.inicio-foto{flex:1 1 340px;min-width:0;margin:0;display:flex;flex-direction:column;gap:14px}
+.inicio-foto img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;background:var(--tinta)}
 
-/* ---------- Cartoes ---------- */
-.grade{display:grid;gap:22px}
-.grade-4{grid-template-columns:repeat(4,1fr)}
-.grade-3{grid-template-columns:repeat(3,1fr)}
-.cartao{
-  background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);
-  padding:28px 26px;display:flex;flex-direction:column;gap:12px;
+/* Citação curta com fio dourado à esquerda */
+.citacao-fina{
+  display:flex;gap:14px;align-items:stretch;
+  font-family:var(--serifa);font-style:italic;font-size:16px;line-height:1.45;color:var(--couro);
 }
-.fundo-alt .cartao{background:var(--marfim)}
-.cartao h3{margin-top:4px}
-.cartao p{color:var(--texto-suave);max-width:none;font-size:16px}
-.icone{
-  width:46px;height:46px;border-radius:8px;background:var(--marfim-2);
-  color:var(--petroleo);display:flex;align-items:center;justify-content:center;flex:none;
-}
-.fundo-alt .icone{background:var(--branco)}
-.icone svg{width:24px;height:24px}
-.cartao .acao{margin-top:auto;padding-top:18px}
+.citacao-fina::before{content:"";flex:0 0 1px;background:var(--latao)}
 
-/* ---------- Pendencias (aparecem so no modo rascunho) ----------
-   O estado nunca depende so da cor: tem selo escrito "pendente"
-   e borda tracejada.                                            */
-.pendencia{
-  display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;
-  font-size:14px;line-height:1.5;color:var(--texto-suave);
-  border:1px dashed var(--linha-2);border-radius:8px;padding:10px 12px;max-width:none;
-}
-.selo{
-  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  background:var(--areia);color:var(--azul);border-radius:4px;padding:3px 8px;flex:none;
-}
-.selo-exemplo{background:var(--petroleo);color:var(--claro-no-escuro)}
-.escuro .pendencia{color:var(--claro-no-escuro-2);border-color:rgba(217,199,163,.45)}
+/* ---------- Princípios ---------- */
+.principios{border-top:1px solid var(--tinta);border-bottom:1px solid var(--tinta);background:var(--branco-papel)}
+.principios-in{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.principio{padding:28px 24px 28px 0;display:flex;gap:14px;align-items:baseline;font-size:15px;line-height:1.5}
+.principio-termo{font-family:var(--serifa);font-style:italic;font-size:22px;color:var(--couro);flex:none}
 
-/* Lista do que vem dentro de um material */
-.dentro{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-direction:column;gap:9px}
-.dentro li{position:relative;padding-left:18px;font-size:15.5px;line-height:1.55;color:var(--texto-suave)}
-.dentro li::before{
-  content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;
-  border:1.5px solid var(--petroleo);border-radius:50%;
-}
-.cartao-pendente{border-style:dashed;background:transparent}
-.fundo-alt .cartao-pendente{background:transparent}
-.cartao-pendente h3{color:var(--texto-suave)}
-.campo-modelo{font-size:15px;color:var(--texto-suave);max-width:none}
-/* Formato e aula relacionada leem como metadado, nao como texto corrido */
-.cartao .campo-modelo{margin-top:6px;padding-top:13px;border-top:1px solid var(--linha);font-size:14px}
-.campo-modelo b{color:var(--azul);font-weight:700}
+/* ---------- Estrutura das seções ---------- */
+.secao{display:flex;flex-direction:column;gap:48px;padding-top:var(--secao-y)}
+.secao:last-of-type{padding-bottom:var(--secao-y)}
+.secao-topo{display:flex;flex-wrap:wrap;gap:16px 64px;align-items:flex-end}
+/* O flex-basis so vale dentro do bloco em linha (.secao-topo). Solto numa
+   coluna flex ele viraria ALTURA e inflaria o titulo. */
+.secao-titulo{display:flex;flex-direction:column;gap:16px}
+.secao-topo .secao-titulo,.contato-in .secao-titulo{flex:999 1 520px;min-width:0}
+.secao-titulo.estreito{max-width:760px}
+.secao-intro{flex:1 1 320px;color:var(--texto)}
+.marcador{font-family:var(--serifa);font-style:italic;font-size:22px;color:var(--latao)}
+.marcador-couro{color:var(--couro)}
+.secao h2{font-size:clamp(30px,3.6vw,46px);line-height:1.15}
 
-/* ---------- Sobre ---------- */
-/* Sobre: retrato pequeno ao lado do texto. A imagem tem 200px de origem,
-   entao e exibida em 140px para continuar nitida. */
-.sobre-grade{
-  display:grid;grid-template-columns:auto minmax(0,1fr);
-  gap:clamp(26px,3.5vw,40px);align-items:start;
+/* ---------- § 01 Para quem é ---------- */
+.perfis{
+  list-style:none;margin:0;padding:0;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  border-top:1px solid var(--tinta);
 }
-.sobre-foto{width:160px}
-.sobre-foto img{width:160px;height:160px;border-radius:var(--raio);border:2px solid var(--areia);object-fit:cover}
-.sobre-foto figcaption{font-size:13px;color:var(--texto-suave);margin-top:10px}
-.sobre-texto h2{margin-bottom:20px}
-.sobre-texto p{font-size:18px}
-.sobre-texto p + p{margin-top:18px}
-.sobre-texto .pendencia{margin-top:22px}
+.perfil{padding:28px 28px 32px 0;display:flex;flex-direction:column;gap:12px;border-bottom:1px solid var(--borda)}
+.perfil-num{font-size:13px;color:var(--pedra);font-weight:500}
+.perfil h3{font-size:23px;line-height:1.25}
+.perfil p{font-size:16px;color:var(--texto)}
 
-/* ---------- Contato ---------- */
-.contato-caixa{
-  background:var(--branco);border:1px solid var(--linha);border-left:4px solid var(--petroleo);
-  border-radius:var(--raio);padding:clamp(26px,4vw,38px);max-width:760px;
+/* ---------- § 02 Pilares ---------- */
+.pilares{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.pilar{background:var(--branco-papel);border:1px solid var(--borda-clara);padding:36px 32px;display:flex;flex-direction:column;gap:16px}
+.pilar-num{font-family:var(--serifa);font-style:italic;font-size:34px;line-height:1;color:var(--couro)}
+.pilar h3{font-size:26px;line-height:1.2}
+.pilar p{font-size:16px;color:var(--texto)}
+
+/* ---------- Citação ---------- */
+.citacao{background:var(--tinta);color:var(--papel)}
+.citacao-in{
+  max-width:1040px;margin:0;display:flex;gap:clamp(20px,3vw,40px);
+  padding-top:clamp(64px,9vw,120px);padding-bottom:clamp(64px,9vw,120px);
 }
-.fundo-alt .contato-caixa{background:var(--marfim)}
-.contato-caixa .botao,.contato-caixa .pendencia{margin-top:22px}
+.citacao-in::before{content:"";flex:0 0 1px;background:var(--latao)}
+.citacao blockquote{margin:0;font-family:var(--serifa);font-size:clamp(26px,3.4vw,44px);line-height:1.25}
+.citacao blockquote em{font-style:italic;color:var(--latao)}
+.citacao figcaption{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--rodape-texto);font-weight:500;margin-top:24px}
 
-/* ---------- Rodape ---------- */
-.rodape{background:var(--azul);color:var(--claro-no-escuro);padding:clamp(44px,6vw,68px) 0 34px}
-.rodape-grade{display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start}
-.rodape-links{display:flex;flex-wrap:wrap;gap:8px 26px;align-items:center}
-.rodape-links a{font-size:15px}
-.rodape-nota{
-  border-top:1px solid rgba(217,199,163,.22);margin-top:34px;padding-top:24px;
-  font-size:13.5px;line-height:1.7;color:var(--claro-no-escuro-2);max-width:90ch;
+/* ---------- § 03 Conteúdos ---------- */
+.canais{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));border-top:1px solid var(--tinta)}
+.canal{padding:32px 32px 36px 0;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--borda)}
+.canal-topo{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.canal h3{font-size:28px}
+.canal-arroba{font-size:14px;color:var(--pedra)}
+.canal p{font-size:16px;color:var(--texto)}
+.link-seta{
+  align-self:flex-start;display:inline-flex;align-items:center;gap:10px;min-height:48px;
+  color:var(--tinta);font-weight:600;font-size:15px;text-decoration:none;
+  border-bottom:1px solid var(--tinta);
 }
-.rodape-nota p{max-width:none}
-.rodape-nota p + p{margin-top:10px}
+.link-seta:hover{color:var(--couro);border-bottom-color:var(--couro)}
+.link-seta svg{width:16px;height:16px;flex:none}
 
+/* ---------- § 04 Materiais ---------- */
+.materiais{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.material{background:var(--linho);padding:32px;display:flex;flex-direction:column;gap:14px}
+.material-meta{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--texto);font-weight:600}
+.material h3{font-size:24px;line-height:1.25}
+.material p{font-size:16px;color:var(--texto)}
+.material .botao{align-self:flex-start}
+
+/* ---------- § 05 Sobre ---------- */
+.sobre{
+  display:flex;flex-wrap:wrap;gap:48px 80px;align-items:flex-start;
+  padding-top:var(--secao-y);padding-bottom:var(--secao-y);
+}
+.sobre-foto{
+  flex:1 1 300px;min-width:0;max-width:460px;width:100%;height:auto;
+  aspect-ratio:1/1;object-fit:cover;object-position:50% 25%;background:var(--tinta);
+}
+.sobre-texto{flex:999 1 480px;min-width:0;display:flex;flex-direction:column;gap:24px}
+.sobre-texto h2{font-size:clamp(30px,3.6vw,46px);line-height:1.15}
+.sobre-texto > p:not(.marcador):not(.citacao-fina):not(.selo-pendente){font-size:clamp(17px,1.5vw,19px);line-height:1.7}
+.sobre-texto .citacao-fina{font-size:18px;line-height:1.5;padding-top:8px}
+
+/* ---------- § 06 Contato ---------- */
+.contato{background:var(--linho)}
+.contato-in{
+  display:flex;flex-wrap:wrap;gap:32px 80px;align-items:flex-end;justify-content:space-between;
+  padding-top:clamp(64px,8vw,112px);padding-bottom:clamp(64px,8vw,112px);
+}
+.contato .secao-titulo{flex:999 1 480px}
+.contato .secao-titulo p:not(.marcador){color:var(--texto)}
+.contato-acao{flex:1 1 320px;display:flex;flex-direction:column;gap:12px}
+
+/* ---------- Rodapé ---------- */
+.rodape{background:var(--tinta);color:var(--rodape-texto)}
+.rodape-in{display:flex;flex-direction:column;gap:40px;padding-top:56px;padding-bottom:40px}
+.rodape-topo{display:flex;flex-wrap:wrap;gap:32px 64px;justify-content:space-between;align-items:flex-start}
+.marca-rodape .marca-nome{font-size:34px;color:var(--papel)}
+.marca-rodape .marca-ponto{flex-basis:7px;height:7px;background:var(--latao)}
+.marca-rodape .marca-linha{background:var(--latao)}
+.marca-rodape .marca-assinatura{font-size:11px;color:var(--rodape-texto)}
+.rodape-links{display:flex;flex-wrap:wrap;gap:4px 28px;font-size:15px}
+.rodape-links a{color:var(--papel);text-decoration:none;padding:10px 0;border-bottom:1px solid transparent}
+.rodape-links a:hover{border-bottom-color:var(--latao)}
+.rodape-base{
+  border-top:1px solid var(--rodape-borda);padding-top:20px;
+  display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;
+}
 
 /* ---------- Responsivo ---------- */
-@media (max-width:980px){
-  .grade-4{grid-template-columns:repeat(2,1fr)}
-  .grade-3{grid-template-columns:repeat(2,1fr)}
-  .sobre-grade{grid-template-columns:1fr}
-  /* Celular: o titulo vem primeiro; a foto da abertura entra depois,
-     menor, para nao empurrar a chamada para fora da primeira tela. */
-  .hero:has(.hero-foto:not([hidden])) .hero-grade{grid-template-columns:minmax(0,1fr)}
-  .hero-foto{justify-self:start;max-width:230px;order:2}
-  .hero-texto-col{order:1}
-}
-/* Cabecalho: marca + cinco itens + botao precisam de ~830px numa linha.
-   Abaixo de 900px o menu recolhe; antes disso os itens se espremiam e
-   quebravam em varias linhas ("Para quem e" chegava a tres). */
-@media (max-width:900px){
-  .abre-menu{display:block}
-  .topo-in{flex-wrap:wrap;gap:12px;padding:14px 24px}
-  .menu{
-    display:none;order:3;width:100%;flex-direction:column;align-items:stretch;gap:0;
-    margin:0;border-top:1px solid rgba(217,199,163,.22);
-  }
-  .menu.aberto{display:flex}
-  .menu a{padding:13px 0;border-bottom:1px solid rgba(242,239,232,.12)}
-  .menu a:hover{border-bottom-color:rgba(242,239,232,.12)}
-  /* Com o menu recolhido, o botao do cabecalho quebraria para uma segunda
-     linha e dobraria a altura do cabecalho fixo. A chamada da abertura ja
-     leva ao mesmo lugar, entao aqui ele sai. */
-  .topo .botao{display:none}
-}
-@media (max-width:760px){
-  :root{--corpo:16px}
-}
-@media (max-width:560px){
-  .grade-4,.grade-3{grid-template-columns:1fr}
-  .hero-acoes .botao{width:100%;justify-content:center}
-}
-
-
-/* ============================================================
-   Redesenho: cada secao ganha uma estrutura propria, para a
-   pagina ter ritmo em vez de repetir a mesma fileira de cartoes.
-   ============================================================ */
-
-/* Marca d'agua discreta nas secoes que pedem respiro visual */
-.com-marca{position:relative;overflow:hidden}
-.com-marca::after{
-  content:"";position:absolute;pointer-events:none;
-  width:min(44vw,460px);aspect-ratio:1;right:-6%;bottom:-16%;
-  background:url('logo-oplanejador.svg') center/contain no-repeat;
-  opacity:.05;
-}
-.escuro.com-marca::after{background-image:url('logo-oplanejador-claro.svg');opacity:.08}
-
-/* --- Para quem e: tabela editorial, sem caixas --- */
-.perfis{
-  list-style:none;display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:0 clamp(32px,5vw,76px);
-}
-.perfil{position:relative;padding:32px 0 36px;border-top:1px solid var(--linha)}
-.perfil::before{content:"";position:absolute;top:-1px;left:0;width:34px;height:3px;background:var(--areia)}
-.perfil h3{font-size:clamp(20px,2.3vw,26px);margin-bottom:13px;max-width:22ch}
-.perfil p{color:var(--texto-suave);max-width:46ch}
-
-/* --- Pilares: colunas separadas por fio, sobre fundo escuro --- */
-.pilares{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-.pilar{padding:0 clamp(20px,3vw,42px);border-left:1px solid rgba(217,199,163,.28)}
-.pilar:first-child{padding-left:0;border-left:0}
-.pilar:last-child{padding-right:0}
-.pilar-ico{display:block;color:var(--areia);margin-bottom:22px}
-.pilar-ico svg{width:30px;height:30px}
-.pilar h3{font-size:clamp(19px,2vw,23px);margin-bottom:13px}
-.pilar p{color:var(--claro-no-escuro-2);max-width:40ch}
-
-/* --- Conteudos: linhas de um indice, no lugar de cartoes --- */
-.canais{border-top:1px solid var(--linha)}
-.canal{
-  display:grid;grid-template-columns:minmax(170px,.9fr) minmax(0,1.9fr) auto;
-  gap:clamp(18px,3vw,44px);align-items:center;
-  padding:26px 0;border-bottom:1px solid var(--linha);
-}
-.canal-nome{display:flex;align-items:center;gap:14px}
-.canal-ico{color:var(--petroleo);flex:none;display:flex}
-.canal-ico svg{width:26px;height:26px}
-.canal-nome h3{font-size:clamp(21px,2.4vw,28px)}
-.canal-texto{color:var(--texto-suave);max-width:50ch;margin:0;font-size:16px}
-.canal .acao{margin:0;padding:0}
-.canal .pendencia{max-width:300px}
-
-/* --- Responsivo dos blocos novos --- */
-@media (max-width:900px){
-  .pilares{grid-template-columns:1fr}
-  .pilar{padding:26px 0;border-left:0;border-top:1px solid rgba(217,199,163,.28)}
-  .pilar:first-child{padding-top:0;border-top:0}
-  .canal{grid-template-columns:1fr;gap:14px;align-items:start;padding:24px 0}
-  .canal .pendencia{max-width:none}
-}
 @media (max-width:700px){
-  .perfis{grid-template-columns:1fr}
-  .com-marca::after{width:70vw;right:-14%;bottom:-8%}
+  .perfil,.canal{padding-right:0}
+  .citacao-in{padding-left:var(--gutter)}
+  .contato-in{align-items:flex-start}
 }
