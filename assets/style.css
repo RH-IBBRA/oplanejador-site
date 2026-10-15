@@ -187,6 +187,13 @@ body.publico .pendente,body.publico .pendente-bloco{display:none !important}
 }
 .link-seta:hover{color:var(--couro);border-bottom-color:var(--couro)}
 .link-seta svg{width:16px;height:16px;flex:none}
+/* Canal ainda sem endereço: aviso ao visitante, não marcação interna.
+   Por isso continua visível na versão pública. */
+.em-breve{
+  align-self:flex-start;display:inline-flex;align-items:center;min-height:48px;
+  font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  color:var(--pedra);border-bottom:1px solid var(--borda);
+}
 
 /* ---------- § 04 Materiais ---------- */
 .materiais{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}

@@ -30,18 +30,17 @@ Construção: Marcelo. Aprovação de conteúdo e visual: Leonardo.
 | YouTube `@oplanejador360` | **confere** — canal "oPlanejador · Leonardo Ces". Botão ativo. |
 | Instagram `@leonardoces` | **confere** — perfil no ar, 8.300 seguidores. **Isto encerra a pendência** "conferir o link quando a troca concluir" do LEIA-ME. |
 | `@leonardoibbra` (antigo) | **morreu** após a troca, como esperado. Nenhum link do site aponta para lá. |
-| E-mail `leonardo@oplanejador.com` | aplicado como `mailto:`. Confirmar que a caixa recebe mensagens. |
-| Podcast | sem URL — o cartão aparece sem botão, com a marcação de pendência. |
+| E-mail `leonardo@oplanejador.com` | aplicado como `mailto:`. **Caixa ativa, confirmada por Marcelo em 15/10/2026.** |
+| Podcast | sem URL. Por decisão de Marcelo em 15/10/2026, o cartão mostra **"Em breve"** no lugar do botão, e continua visível também na versão pública. |
 
 ## Ainda pendente
 
-- [ ] **URL do podcast** no Spotify for Creators (entra no lançamento).
+- [ ] **URL do podcast** no Spotify for Creators. Até lá o cartão mostra "Em breve"; ao preencher `url` e `confirmado: true` no `config.js`, o aviso sai e o botão entra sozinho.
 - [ ] **Primeiro material gratuito: "Mapa da Zona X".** Os cartões só aparecem
       com o arquivo real; hoje estão os espaços do modelo, visíveis só no rascunho.
 - [ ] **Revisão da biografia** pelo Leonardo. O texto é o aprovado, com "15 anos";
       o briefing registra que eles se completam no início de 2027.
-- [ ] **Confirmar que a caixa `leonardo@oplanejador.com` está ativa.**
-- [ ] **Acesso nominal ao DNS** de `oplanejador.com`, quando a implantação começar.
+- [x] **Acesso ao DNS** de `oplanejador.com` — confirmado por Marcelo em 15/10/2026.
 - [ ] **Plataforma de hospedagem** definida e documentada, com custos.
 
 ## Decisões tomadas na implementação

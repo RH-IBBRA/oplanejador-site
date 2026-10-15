@@ -48,6 +48,15 @@
       visiveis++;
       return;
     }
+    /* "Em breve": sem botao, mas o cartao fica no ar — inclusive na versao
+       publica — com o aviso ao visitante no lugar do link. */
+    if (c.emBreve) {
+      var breve = cartao.querySelector('[data-canal-breve]');
+      if (breve) { breve.textContent = c.avisoBreve || 'Em breve'; mostrar(breve); }
+      if (aviso) aviso.remove();
+      visiveis++;
+      return;
+    }
     if (nota && c.nota) nota.textContent = c.nota;
     if (rascunho) { visiveis++; } else { esconder(cartao); }
   });

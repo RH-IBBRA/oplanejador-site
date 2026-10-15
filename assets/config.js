@@ -35,7 +35,13 @@ var OP_CONFIG = {
       arroba: 'Spotify · YouTube',
       url: '',
       confirmado: false,
-      nota: 'Pendente · URL do programa no Spotify for Creators (no lançamento)'
+      /* emBreve: o cartao continua visivel, inclusive na versao publica, com o
+         aviso "Em breve" no lugar do botao. Nao e pendencia interna: e um
+         aviso ao visitante. Ao receber a URL, preencher url e por
+         confirmado: true — o aviso sai e o botao entra sozinho. */
+      emBreve: true,
+      avisoBreve: 'Em breve',
+      nota: ''
     }
   },
 
