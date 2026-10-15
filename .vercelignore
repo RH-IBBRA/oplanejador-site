@@ -1,2 +1,7 @@
+# Fora do deploy: servidor local, conceito anterior e documentação interna.
+# O README e o ACEITE ficam no repositório, para quem mexe no código, mas
+# não vão para o ar — trazem pendências, prazos e decisões do projeto.
 serve.ps1
 _arquivo/
+_referencia/
+*.md
