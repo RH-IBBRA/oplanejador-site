@@ -63,7 +63,8 @@ Só depois da aprovação de Leonardo:
 
 ## Deploy
 
-Repositório: `RH-IBBRA/LEO-CES-Mentoria` (branch `main`). Sem build: o repositório
+Repositório: `RH-IBBRA/oplanejador-site` (branch `main`), renomeado em 15/10/2026
+(antes `LEO-CES-Mentoria`, do conceito anterior). Sem build: o repositório
 é servido como está. Domínio `oplanejador.com` no Squarespace Domains, no nome de
 Leonardo, que é o único administrador — o acesso ao DNS é nominal e restrito, e
 vem quando a implantação começar (S03.11).
