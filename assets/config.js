@@ -33,7 +33,14 @@ var OP_CONFIG = {
     },
     podcast: {
       arroba: 'Spotify · YouTube',
-      url: '',
+      /* Show criado no Spotify for Creators; URL registrada no Notion em
+         26/10/2026. Conferida na mesma data: ainda NAO abre publicamente
+         (404 na URL direta, e o oEmbed do Spotify devolve vazio, enquanto um
+         show existente devolve os dados). Um show so aparece em
+         open.spotify.com depois do primeiro episodio publicado e processado.
+         Virar confirmado: true quando o link abrir — o aviso "Em breve" sai e
+         o botao entra sozinho. */
+      url: 'https://open.spotify.com/show/4mVIQbIXKf59G3o9fFGc6J',
       confirmado: false,
       /* emBreve: o cartao continua visivel, inclusive na versao publica, com o
          aviso "Em breve" no lugar do botao. Nao e pendencia interna: e um

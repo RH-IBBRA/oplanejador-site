@@ -31,11 +31,11 @@ Construção: Marcelo. Aprovação de conteúdo e visual: Leonardo.
 | Instagram `@leonardoces` | **confere** — perfil no ar, 8.300 seguidores. **Isto encerra a pendência** "conferir o link quando a troca concluir" do LEIA-ME. |
 | `@leonardoibbra` (antigo) | **morreu** após a troca, como esperado. Nenhum link do site aponta para lá. |
 | E-mail `leonardo@oplanejador.com` | aplicado como `mailto:`. **Caixa ativa, confirmada por Marcelo em 15/10/2026.** |
-| Podcast | sem URL. Por decisão de Marcelo em 15/10/2026, o cartão mostra **"Em breve"** no lugar do botão, e continua visível também na versão pública. |
+| Podcast | URL do show registrada em 26/10/2026 (`open.spotify.com/show/4mVIQbIXKf59G3o9fFGc6J`), mas **ainda não abre publicamente** — 404 na URL direta e oEmbed vazio, enquanto um show existente responde. O programa existe no Spotify for Creators; só aparece no Spotify depois do primeiro episódio publicado. Guardada no `config.js` desligada. Por decisão de Marcelo em 15/10/2026, o cartão mostra **"Em breve"** no lugar do botão, e continua visível também na versão pública. |
 
 ## Ainda pendente
 
-- [ ] **URL do podcast** no Spotify for Creators. Até lá o cartão mostra "Em breve"; ao preencher `url` e `confirmado: true` no `config.js`, o aviso sai e o botão entra sozinho.
+- [ ] **Publicar o primeiro episódio** no Spotify for Creators, que é o que faz o show aparecer em open.spotify.com. A URL já está no `config.js`; falta só ela abrir. Até lá o cartão mostra "Em breve"; ao preencher `url` e `confirmado: true` no `config.js`, o aviso sai e o botão entra sozinho.
 - [ ] **Primeiro material gratuito: "Mapa da Zona X".** Os cartões só aparecem
       com o arquivo real; hoje estão os espaços do modelo, visíveis só no rascunho.
 - [ ] **Revisão da biografia** pelo Leonardo. O texto é o aprovado, com "15 anos";
