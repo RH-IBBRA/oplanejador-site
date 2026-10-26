@@ -165,10 +165,12 @@ body.publico .pendente,body.publico .pendente-bloco{display:none !important}
 /* ---------- Citação ---------- */
 .citacao{background:var(--tinta);color:var(--papel)}
 .citacao-in{
-  max-width:1040px;margin:0;display:flex;gap:clamp(20px,3vw,40px);
+  max-width:1040px;margin:0;display:grid;
+  grid-template-columns:1px minmax(0,1fr);
+  column-gap:clamp(20px,3vw,40px);align-items:start;
   padding-top:clamp(64px,9vw,120px);padding-bottom:clamp(64px,9vw,120px);
 }
-.citacao-in::before{content:"";flex:0 0 1px;background:var(--latao)}
+.citacao-in::before{content:"";background:var(--latao);grid-row:1/span 2}
 .citacao blockquote{margin:0;font-family:var(--serifa);font-size:clamp(26px,3.4vw,44px);line-height:1.25}
 .citacao blockquote em{font-style:italic;color:var(--latao)}
 .citacao figcaption{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--rodape-texto);font-weight:500;margin-top:24px}
@@ -248,4 +250,53 @@ body.publico .pendente,body.publico .pendente-bloco{display:none !important}
   .perfil,.canal{padding-right:0}
   .citacao-in{padding-left:var(--gutter)}
   .contato-in{align-items:flex-start}
+}
+
+/* ============================================================
+   Celular: a referência foi desenhada para a tela grande, e em
+   390px o texto quebrava demais — o título da abertura chegava a
+   oito linhas e o cabeçalho ocupava 211px antes do conteúdo.
+   Aqui só mudam tamanho e respiro. Cores, fontes, textos e a
+   ordem das seções continuam os aprovados.
+   ============================================================ */
+@media (max-width:620px){
+  /* Abertura: 38px em coluna de 335px quebrava em 8 linhas. */
+  .inicio h1{font-size:31px;line-height:1.14;letter-spacing:-.01em}
+  .inicio-apoio{font-size:16.5px}
+  .inicio{gap:32px}
+  .acoes{gap:10px}
+  .acoes .botao{flex:1 1 auto;justify-content:center}
+
+  /* Cabeçalho mais compacto: a marca menor e o menu em duas linhas
+     apertadas, em vez de duas linhas largas. */
+  .topo-in{gap:10px 20px;padding-top:16px;padding-bottom:16px}
+  .marca-nome{font-size:25px}
+  .marca-assinatura{font-size:9.5px;letter-spacing:.18em}
+  /* gap 12px e o que faz os cinco itens caberem numa linha so em 390px;
+     abaixo disso quebra em duas, de propria vontade. padding de 10px
+     mantem a area de toque em ~40px de altura. */
+  .menu{gap:0 10px;font-size:13px;width:100%;justify-content:space-between}
+  .menu a{padding:10px 0}
+
+  /* Citação: menos fôlego vertical e tipo um pouco menor. */
+  .citacao-in{column-gap:16px;padding-top:56px;padding-bottom:56px}
+  .citacao blockquote{font-size:25px;line-height:1.3}
+  .citacao figcaption{margin-top:18px}
+
+  /* Cartões: menos respiro interno para sobrar largura ao texto. */
+  .pilar{padding:28px 22px}
+  .material{padding:26px 22px}
+  .pilares,.materiais{gap:16px}
+
+  /* Seções: respiro vertical proporcional à tela. */
+  .secao{gap:36px;padding-top:72px}
+  .secao h2{font-size:27px;line-height:1.2}
+  .sobre{gap:32px;padding-top:72px;padding-bottom:72px}
+  .sobre-texto{gap:20px}
+  .contato-in{padding-top:72px;padding-bottom:72px}
+
+  /* Rodapé: as duas linhas da base empilhadas, sem espremer. */
+  .rodape-in{gap:32px;padding-top:44px}
+  .rodape-base{flex-direction:column;gap:10px}
+  .rodape-topo{gap:24px}
 }

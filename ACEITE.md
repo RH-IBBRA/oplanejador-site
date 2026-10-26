@@ -58,7 +58,21 @@ Construção: Marcelo. Aprovação de conteúdo e visual: Leonardo.
    página de privacidade só é necessária havendo medição ou formulário, e o site
    não tem nenhum dos dois. Está preparado no `config.js` para entrar quando
    existir.
-4. **O conceito anterior a este repasse foi arquivado**, não apagado: está em
+4. **O celular recebeu ajuste de tamanho e respiro**, pedido por Marcelo em
+   26/10/2026, porque a referência foi desenhada para tela grande e em 390px o
+   texto quebrava demais: o título da abertura ocupava **oito linhas** e o
+   cabeçalho **211px** antes de qualquer conteúdo. Abaixo de 620px o título vai
+   a 31px, o menu fecha em uma linha e os cartões têm menos respiro interno —
+   resultado: título em 6 linhas e cabeçalho em 143px. **Cores, fontes, textos e
+   a ordem das seções continuam os aprovados**, e de 768px para cima o site
+   permanece idêntico à referência, conferido por medição.
+
+   No caminho foi corrigido um **bug da implementação**: a legenda da citação
+   virava um terceiro item na mesma linha e espremia o texto para 202px de
+   largura, contra 314px da referência. Agora a legenda fica abaixo, como no
+   original, e a largura bate com a referência em todas as larguras.
+
+5. **O conceito anterior a este repasse foi arquivado**, não apagado: está em
    `_arquivo/` e no histórico do git. A identidade que havia sido proposta aqui
    (paleta azul/marfim, Georgia/Arial e um símbolo monogramático) foi substituída
    pela identidade v0.5 aprovada.
