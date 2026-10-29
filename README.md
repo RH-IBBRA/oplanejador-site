@@ -69,9 +69,26 @@ Repositório: `RH-IBBRA/oplanejador-site` (branch `main`), renomeado em 15/10/20
 Leonardo, que é o único administrador — o acesso ao DNS é nominal e restrito, e
 vem quando a implantação começar (S03.11).
 
-Custos do site devem ser apresentados a Leonardo **separadamente** do teto de
-R$ 1.000/mês dos agentes. Nesta versão não há serviço pago: o site é estático e
-cabe em plano gratuito.
+## Hospedagem e custos
+
+Hospedado na **Vercel, no time da IBBRA (plano Pro)**, do qual Marcelo faz parte.
+O site é estático e não consome build nem função serverless, então **não gera
+custo incremental** — ele aproveita uma assinatura que já existe. Mas **não é
+grátis**: a assinatura Pro é paga pela IBBRA.
+
+Dois pontos para a entrega final, que o LEIA-ME do repasse levanta:
+
+- O repasse pede **"contas no nome do projeto"** e, na entrega, **"acesso
+  administrativo em nome de Leonardo"**. Hoje o projeto vive na organização da
+  IBBRA, e o oPlanejador é explicitamente **"não é o site da IBBRA"**. Migrar
+  para uma conta do projeto é decisão de Leonardo.
+- Custos do site devem ser apresentados a Leonardo **separadamente** do teto de
+  R$ 1.000/mês dos agentes. O valor a apresentar não é zero: é "sem custo
+  incremental, sobre a assinatura Pro da IBBRA".
+
+**Domínio:** `oplanejador.com` é o host oficial e serve a produção; o `www`
+redireciona para ele (308). O `canonical`, o `og:url` e a `og:image` apontam
+todos para a raiz — se o host oficial mudar, os três mudam juntos.
 
 ## Prazos
 

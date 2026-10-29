@@ -41,7 +41,15 @@ Construção: Marcelo. Aprovação de conteúdo e visual: Leonardo.
 - [ ] **Revisão da biografia** pelo Leonardo. O texto é o aprovado, com "15 anos";
       o briefing registra que eles se completam no início de 2027.
 - [x] **Acesso ao DNS** de `oplanejador.com` — confirmado por Marcelo em 15/10/2026.
-- [ ] **Plataforma de hospedagem** definida e documentada, com custos.
+- [x] **Plataforma de hospedagem** definida: Vercel, time da IBBRA (Pro), com o
+      domínio `oplanejador.com` apontado e o `www` redirecionando para a raiz.
+      Documentada no [README.md](README.md). **Correção de 29/10/2026:** um
+      registro anterior dizia "plano gratuito, custo zero" — estava errado, a
+      conta é Pro e paga pela IBBRA. O site não gera custo incremental, mas isso
+      não é a mesma coisa que ser grátis.
+- [ ] **Decidir se o projeto migra para uma conta do próprio oPlanejador.** O
+      repasse pede contas no nome do projeto e acesso administrativo em nome de
+      Leonardo; hoje o site vive na organização da IBBRA.
 
 ## Decisões tomadas na implementação
 
