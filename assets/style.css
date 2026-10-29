@@ -116,6 +116,9 @@ body.publico .pendente,body.publico .pendente-bloco{display:none !important}
 .acoes{display:flex;flex-wrap:wrap;gap:12px;padding-top:4px}
 .inicio-foto{flex:1 1 340px;min-width:0;margin:0;display:flex;flex-direction:column;gap:14px}
 .inicio-foto img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;background:var(--tinta)}
+/* display:contents faz a <img> continuar sendo o item de flex/grid, e não a
+   <picture> que a embrulha — sem isso o layout das fotos muda. */
+picture{display:contents}
 
 /* Citação curta com fio dourado à esquerda */
 .citacao-fina{
@@ -210,8 +213,12 @@ body.publico .pendente,body.publico .pendente-bloco{display:none !important}
   display:flex;flex-wrap:wrap;gap:48px 80px;align-items:flex-start;
   padding-top:var(--secao-y);padding-bottom:var(--secao-y);
 }
+/* O dimensionamento fica na <picture>, não na <img>: com display:contents a
+   imagem vira o item de flex, mas o flex-grow não se resolve de forma
+   confiável, e a foto parava de crescer no celular. */
+.sobre-foto-caixa{display:block;flex:1 1 300px;min-width:0;max-width:460px;width:100%}
 .sobre-foto{
-  flex:1 1 300px;min-width:0;max-width:460px;width:100%;height:auto;
+  width:100%;height:auto;
   aspect-ratio:1/1;object-fit:cover;object-position:50% 25%;background:var(--tinta);
 }
 .sobre-texto{flex:999 1 480px;min-width:0;display:flex;flex-direction:column;gap:24px}

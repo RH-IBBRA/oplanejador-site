@@ -27,6 +27,7 @@
 <meta property="og:image" content="https://oplanejador.com/assets/img/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="oPlanejador, com Leonardo Ces: formação e evolução de Financial Advisors" />
 <meta property="og:url" content="https://oplanejador.com/" />
 <meta name="twitter:card" content="summary_large_image" />
 
@@ -74,7 +75,10 @@
     </div>
   </div>
   <figure class="inicio-foto">
-    <img src="assets/img/leonardo-ces-inicio.jpg" alt="Leonardo Ces, de camisa branca, sentado e olhando para a câmera" width="1200" height="1800" />
+    <picture>
+      <source srcset="assets/img/leonardo-ces-inicio.webp" type="image/webp" />
+      <img src="assets/img/leonardo-ces-inicio.jpg" alt="Leonardo Ces, de camisa branca, sentado e olhando para a câmera" width="1200" height="1800" fetchpriority="high" decoding="async" />
+    </picture>
     <figcaption class="citacao-fina">Um profissional que constrói, ensina e busca equilíbrio.</figcaption>
   </figure>
 </section>
@@ -237,7 +241,10 @@
 
 <!-- § 05 — SOBRE -->
 <section class="faixa sobre" id="sobre">
-  <img class="sobre-foto" src="assets/img/leonardo-ces-sobre.jpg" alt="Leonardo Ces, pensativo, com a mão no queixo" width="1200" height="1800" loading="lazy" decoding="async" />
+  <picture class="sobre-foto-caixa">
+    <source srcset="assets/img/leonardo-ces-sobre.webp" type="image/webp" />
+    <img class="sobre-foto" src="assets/img/leonardo-ces-sobre.jpg" alt="Leonardo Ces, pensativo, com a mão no queixo" width="1200" height="1800" loading="lazy" decoding="async" />
+  </picture>
   <div class="sobre-texto">
     <p class="marcador">§ 05</p>
     <h2>Experiência prática, compartilhada.</h2>
