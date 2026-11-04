@@ -13,8 +13,10 @@ Estático: HTML, CSS e JS, sem build. A única dependência externa são as font
 
 ## Estado
 
-Em **modo rascunho**: `noindex` ativo, faixa de aviso no topo e marcações de
-pendência visíveis. Pendências e checklist em [ACEITE.md](ACEITE.md).
+**Publicado.** Em 04/11/2026, por autorização de Leonardo por e-mail (29/10),
+o `noindex` foi removido e o site passou para `modo: 'publico'`. Com isso saem
+a faixa de rascunho e todas as marcações de pendência, e a seção de materiais
+fica oculta até existir arquivo real. Pendências em [ACEITE.md](ACEITE.md).
 
 ## Como abrir
 

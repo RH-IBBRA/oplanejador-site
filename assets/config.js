@@ -13,7 +13,7 @@
 
 var OP_CONFIG = {
 
-  modo: 'rascunho',
+  modo: 'publico',
 
   canais: {
     youtube: {

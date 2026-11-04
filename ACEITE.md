@@ -20,7 +20,9 @@ Construção: Marcelo. Aprovação de conteúdo e visual: Leonardo.
 - [~] **Links e arquivos reais conferidos; pendentes ocultos na versão pública.**
       YouTube, Instagram e e-mail conferidos (abaixo). Falta a URL do podcast.
       O mecanismo de ocultar pendências na versão pública está pronto e testado.
-- [ ] **Leonardo revisou textos, biografia e visual** nesta implementação.
+- [~] **Leonardo revisou textos, biografia e visual** nesta implementação. Em
+      29/10/2026 autorizou publicar; a revisão item a item segue pendente, e ele
+      registrou que "o restante das considerações" evolui com as tarefas do projeto.
 - [x] **Acessos, manutenção e custos documentados** — no [README.md](README.md).
 
 ## Links: o que foi conferido em 14/10/2026
