@@ -1,0 +1,8 @@
+# oPlanejador — https://oplanejador.com
+# O site é público desde 04/11/2026. Antes disso o acesso dos buscadores era
+# bloqueado pela metatag noindex, não por este arquivo.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://oplanejador.com/sitemap.xml
