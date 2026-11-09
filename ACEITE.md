@@ -20,7 +20,8 @@ Construção: Marcelo. Aprovação de conteúdo e visual: Leonardo.
 - [~] **Links e arquivos reais conferidos; pendentes ocultos na versão pública.**
       YouTube, Instagram e e-mail conferidos (abaixo). Falta a URL do podcast.
       O mecanismo de ocultar pendências na versão pública está pronto e testado.
-- [~] **Leonardo revisou textos, biografia e visual** nesta implementação. Em
+- [~] **Leonardo revisou textos, biografia e visual** nesta implementação. A
+      biografia foi aprovada em 14/10/2026 (briefing S04.15 v2.0). Em
       29/10/2026 autorizou publicar; a revisão item a item segue pendente, e ele
       registrou que "o restante das considerações" evolui com as tarefas do projeto.
 - [x] **Acessos, manutenção e custos documentados** — no [README.md](README.md).
@@ -40,8 +41,18 @@ Construção: Marcelo. Aprovação de conteúdo e visual: Leonardo.
 - [ ] **Publicar o primeiro episódio** no Spotify for Creators, que é o que faz o show aparecer em open.spotify.com. A URL já está no `config.js`; falta só ela abrir. Até lá o cartão mostra "Em breve"; ao preencher `url` e `confirmado: true` no `config.js`, o aviso sai e o botão entra sozinho.
 - [ ] **Primeiro material gratuito: "Mapa da Zona X".** Os cartões só aparecem
       com o arquivo real; hoje estão os espaços do modelo, visíveis só no rascunho.
-- [ ] **Revisão da biografia** pelo Leonardo. O texto é o aprovado, com "15 anos";
-      o briefing registra que eles se completam no início de 2027.
+- [x] **Biografia aprovada** por Leonardo em 14/10/2026, com "15 anos", que se
+      completam no início de 2027, considerando testes e implantação (briefing
+      S04.15 v2.0 no Notion). O texto do site já é o aprovado.
+- [ ] **Ajustes do teste técnico S05.22** (02/11/2026): o Notion registra seis
+      ajustes, dois críticos antes do lançamento. A página S05.22 não está
+      compartilhada com Marcelo; lista pedida a Leonardo em 09/11/2026.
+- [ ] **Registrar no Notion a aprovação da publicação.** O site está público desde
+      04/11 (autorização por e-mail de 29/10), mas a tarefa S04.15 ainda mostra
+      "Aprovação de Leonardo" em aberto e o site "com noindex".
+- [ ] **Entrega a Leonardo:** acesso administrativo, cópia dos arquivos e do
+      repositório, conforme o briefing ("contas sob controle do projeto") e a
+      seção 11.1 da S03.11.
 - [x] **Acesso ao DNS** de `oplanejador.com` — confirmado por Marcelo em 15/10/2026.
 - [x] **Plataforma de hospedagem** definida: Vercel, time da IBBRA (Pro), com o
       domínio `oplanejador.com` apontado e o `www` redirecionando para a raiz.
