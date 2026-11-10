@@ -47,7 +47,11 @@ img{display:block;max-width:100%}
 h1,h2,h3{font-family:var(--serifa);font-weight:400;color:var(--tinta);margin:0}
 p{margin:0}
 a{color:var(--tinta)}
-:focus-visible{outline:2px solid var(--latao);outline-offset:3px}
+/* Contorno de foco (navegacao por teclado). Nos fundos claros ele e tinta:
+   o latao sobre o papel da 2,3:1, abaixo do minimo de 3:1 para indicador
+   de foco (WCAG 1.4.11). Nos fundos escuros continua latao, que la da 5:1.
+   Correcao de 09/11/2026, apos o teste tecnico; nenhuma cor da marca mudou. */
+:focus-visible{outline:2px solid var(--tinta);outline-offset:3px}
 .citacao :focus-visible,.rodape :focus-visible{outline-color:var(--latao)}
 
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -251,6 +255,13 @@ picture{display:contents}
   border-top:1px solid var(--rodape-borda);padding-top:20px;
   display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;
 }
+
+/* ---------- Página 404 ---------- */
+.erro{min-height:52vh}
+.erro h1{font-size:clamp(30px,3.6vw,46px);line-height:1.15}
+/* flex:none porque o .secao-intro tem flex-basis de 320px, que dentro da
+   coluna do .secao-titulo viraria altura e afastaria os botoes. */
+.erro .secao-intro{flex:none;max-width:600px}
 
 /* ---------- Responsivo ---------- */
 @media (max-width:700px){

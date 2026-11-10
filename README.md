@@ -28,6 +28,7 @@ fica oculta até existir arquivo real. Pendências em [ACEITE.md](ACEITE.md).
 | Arquivo | O que é |
 | --- | --- |
 | `index.html` | a página inteira; os **textos** ficam aqui |
+| `404.html` | página de erro para endereço inexistente (a Vercel a serve com status 404) |
 | `assets/config.js` | **links, materiais, contato e o modo** (rascunho/público) |
 | `assets/style.css` | cores, fontes e escala — tudo no `:root` no topo |
 | `assets/app.js` | aplica o `config.js` na página; não guarda conteúdo |

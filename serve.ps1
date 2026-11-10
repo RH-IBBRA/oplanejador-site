@@ -1,4 +1,4 @@
-param([int]$Port = 8899, [string]$Root = "C:\Projetos\mentoria-leonardo")
+param([int]$Port = 8899, [string]$Root = $PSScriptRoot)
 
 $listener = New-Object System.Net.HttpListener
 $listener.Prefixes.Add("http://localhost:$Port/")
@@ -32,8 +32,15 @@ $handler = {
         $ctx.Response.ContentLength64 = $bytes.Length
         $ctx.Response.OutputStream.Write($bytes, 0, $bytes.Length)
       } else {
+        # Igual a Vercel: endereco inexistente recebe o 404.html, com status 404.
         $ctx.Response.StatusCode = 404
-        $msg = [System.Text.Encoding]::UTF8.GetBytes("404 Not Found: $path")
+        $page404 = Join-Path $Root "404.html"
+        if (Test-Path $page404 -PathType Leaf) {
+          $msg = [System.IO.File]::ReadAllBytes($page404)
+          $ctx.Response.ContentType = "text/html; charset=utf-8"
+        } else {
+          $msg = [System.Text.Encoding]::UTF8.GetBytes("404 Not Found: $path")
+        }
         $ctx.Response.OutputStream.Write($msg, 0, $msg.Length)
       }
     }
