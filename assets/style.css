@@ -290,11 +290,13 @@ picture{display:contents}
   .topo-in{gap:10px 20px;padding-top:16px;padding-bottom:16px}
   .marca-nome{font-size:25px}
   .marca-assinatura{font-size:9.5px;letter-spacing:.18em}
-  /* gap 12px e o que faz os cinco itens caberem numa linha so em 390px;
-     abaixo disso quebra em duas, de propria vontade. padding de 10px
-     mantem a area de toque em ~40px de altura. */
+  /* gap de 10px e o que faz os cinco itens caberem numa linha so em 390px;
+     abaixo disso quebra em duas, de propria vontade. Area de toque de pelo
+     menos 44x44px (recomendacao de acessibilidade): padding de 12px leva a
+     altura a ~46px, e min-width alarga itens curtos como "Sobre", com o
+     texto centralizado. Ajuste de 10/11/2026, apos o teste tecnico. */
   .menu{gap:0 10px;font-size:13px;width:100%;justify-content:space-between}
-  .menu a{padding:10px 0}
+  .menu a{padding:12px 0;min-width:44px;text-align:center}
 
   /* Citação: menos fôlego vertical e tipo um pouco menor. */
   .citacao-in{column-gap:16px;padding-top:56px;padding-bottom:56px}
